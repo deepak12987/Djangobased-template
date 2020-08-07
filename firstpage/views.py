@@ -5,6 +5,7 @@ def index(request):
     return render(request,'one.html')
 def analysis(request):
     djtext = request.POST.get("text","default")
+    djtext1 = djtext
     resp = request.POST.get("removepunc","off")
     uppe = request.POST.get("uppercase","off")
     newline = request.POST.get("removenewline","off")
@@ -41,7 +42,7 @@ def analysis(request):
             else:
                 analyzed += char
         djtext = analyzed
-        params = {'analyzed_text':analyzed}
+    params = {'analyzed_text':analyzed,'Your_input':djtext1}
     
 
     if resp != "on" and extraspace != "on"  and newline != "on" and uppe != "on":

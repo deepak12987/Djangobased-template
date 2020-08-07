@@ -10,6 +10,10 @@ def analysis(request):
     uppe = request.POST.get("uppercase","off")
     newline = request.POST.get("removenewline","off")
     extraspace = request.POST.get("extraspaceremove","off")
+
+    if resp != "on" and extraspace != "on"  and newline != "on" and uppe != "on":
+        return render(request,"alert.html")
+        
     if resp == "on":
         punctuations = '''!()-[]{};:'"\,<>./?@#$%^&*_~'''
         analyzed = ""
@@ -43,11 +47,11 @@ def analysis(request):
                 analyzed += char
         djtext = analyzed
     params = {'analyzed_text':analyzed,'Your_input':djtext1}
+    return render(request,'analyze.html',params)
     
 
-    if resp != "on" and extraspace != "on"  and newline != "on" and uppe != "on":
-        return HttpResponse("error")
-    return render(request,'analyze.html',params)
+    
+    
 
       
 
